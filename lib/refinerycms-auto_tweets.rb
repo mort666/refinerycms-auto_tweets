@@ -16,21 +16,21 @@ module Refinery
       end
 
       config.after_initialize do
-        RefinerySetting.find_or_set(:twitter_oauth_token,
+        Refinery::Setting.find_or_set(:twitter_oauth_token,
           '000000000-xxxxxxxxyour_twitter_oauth_tokenxxxxxxxx')
-        RefinerySetting.find_or_set(:twitter_oauth_token_secret,
+        Refinery::Setting.find_or_set(:twitter_oauth_token_secret,
           'xxxxxyour_twitter_oauth_token_secretxxxx')
-        RefinerySetting.find_or_set(:twitter_consumer_key,
+        Refinery::Setting.find_or_set(:twitter_consumer_key,
           'xxxxconsumer_keyxxxx')
-        RefinerySetting.find_or_set(:twitter_consumer_secret,
+        Refinery::Setting.find_or_set(:twitter_consumer_secret,
           'xxxxxxxxxxtwitter_consumer_secretxxxxxxxx')
-        RefinerySetting.find_or_set(:twitter_message,
+        Refinery::Setting.find_or_set(:twitter_message,
           'A new blog post "{title}" is published. Read more at {url}.')
       end
 
       require 'iwa_extension/auto_tweet'
       config.to_prepare do
-        BlogPost.class_eval do
+        Refinery::Blog::Post.class_eval do
           include ::IwaExtension::AutoTweet
         end
       end
