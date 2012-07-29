@@ -1,5 +1,6 @@
 class BlogPostObserver < ActiveRecord::Observer
-	observe :refinery_blog_post
+	observe Refinery::Blog::Post
+	
 	def after_save(record)
     if record.should_tweet?
       record.post_tweet!
