@@ -19,9 +19,11 @@ module IwaExtension
     def should_tweet?
       live? && post_tweet && !tweeted
     end
+    
+    include Rails.application.routes.url_helpers
 
     def post_tweet!
-      url = Rails.application.routes.url_helpers.refinery.blog_post_url(self)
+      url = refinery.blog_post_url(self)
       begin
         ::IwaExtension::Tweeter.post_tweet_message(title, url)
         self.tweeted = true
