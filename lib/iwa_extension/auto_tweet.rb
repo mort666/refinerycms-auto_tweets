@@ -16,15 +16,12 @@ module IwaExtension
   end
 
   module AutoTweet
-    include ActionController::UrlWriter
-    include Rails.application.routes.url_helpers
-    
     def should_tweet?
       live? && post_tweet && !tweeted
     end
     
     def post_tweet!
-      url = refinery.blog_post_url(self)
+      url = Rails.application.routes.url_helpers.refinery.blog_post_url(self)
       begin
         ::IwaExtension::Tweeter.post_tweet_message(title, url)
         self.tweeted = true
