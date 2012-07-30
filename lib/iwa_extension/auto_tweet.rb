@@ -3,6 +3,8 @@ require 'httparty'
 
 module IwaExtension
   module Tweeter
+    include ActionView::Helpers::TextHelper
+    
     def self.post_tweet_message(title, url)
       ::Twitter.configure do |config|
         config.consumer_key = Refinery::Setting.get(:twitter_consumer_key)
@@ -11,7 +13,7 @@ module IwaExtension
         config.oauth_token_secret = Refinery::Setting.get(:twitter_oauth_token_secret)
       end
       message = Refinery::Setting.get(:twitter_message)
-      message = message.gsub('{title}', title).gsub('{url}', ::IwaExtension::Bitly.shorten(url))
+      message = message.gsub('{title}', title).gsub('{stub}', truncate(strip_tags(custom_teaser), :length => 130-title.length, :seperator => "...")).gsub('{url}', ::IwaExtension::Bitly.shorten(url))
       ::Twitter.update(message)
     end
   end
