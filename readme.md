@@ -1,10 +1,14 @@
 # Auto Tweets engine for Refinery CMS.
 
+## Introduction
+
+Posts Tweets for blog posts within RefineryCMS 2.x.x, requires Twitter account and Bit.ly API account for URL Shortening.
+
 ## Installing
 
 Add refinerycms-auto_tweets to your Gemfile
 
-    gem 'refinerycms-auto_tweets', :git => 'git://github.com/iwalabs/refinerycms-auto_tweets.git'
+    gem 'refinerycms-auto_tweets', :git => 'git://github.com/mort666/refinerycms-auto_tweets.git'
 
 Run generator
 
@@ -12,10 +16,9 @@ Run generator
 
 *Please check your `config/application.rb` for observer configuration*
 
-Set default host URL
+Set default host URL. Change accordingly for environment.
 
-    Rails.application.routes.default_url_options[:host]= 'www.iwa.fi'
-
+    Rails.application.routes.default_url_options[:host]= 'lvh.me:3000'
 
 Run migration
 
@@ -37,16 +40,19 @@ Set your cron job to run the following task.
     gem install refinerycms-auto_tweets.gem
 
 
-### TODO: Sign up for a http://rubygems.org/ account and publish the gem
-
-    gem push refinerycms-auto_tweets.gem
-
 ## Authors
+
+Original refinerycms-auto_tweets release for 1.7.x Refinery CMS authored by
 
 * Jussi Virtanen: http://github.com/iwalabs
 * Timo Lehto: http://github.com/iwalabs
 * Joe Rerngniransatit: http://github.com/iwalabs
 
+Modifications for Refinery CMS 2.x.x by
+
+* Stephen Kapp: https://github.com/mort666/
+
 ## License
 
 Copyright 2012 Iwa Labs Ltd. Licensed under the MIT License.
+Modifications Copyright 2012 Stephen Kapp. Licensed under the MIT License.

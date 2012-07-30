@@ -38,7 +38,7 @@ module IwaExtension
 
     # your bit.ly api key can be found at http://bit.ly/a/your_api_key
     def self.required_params
-      {:version => "2.0.1", :login => "o_2348nmppbm", :apiKey => 'R_acc53a3aabe1a1b0de5f34e22566a308'}
+      {:version => "2.0.1", :login => Refinery::Setting.get(:bitly_login), :apiKey => Refinery::Setting.get(:bitly_api_key)}
     end
   end
 

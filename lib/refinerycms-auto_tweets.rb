@@ -24,6 +24,10 @@ module Refinery
           'xxxxconsumer_keyxxxx')
         Refinery::Setting.find_or_set(:twitter_consumer_secret,
           'xxxxxxxxxxtwitter_consumer_secretxxxxxxxx')
+        Refinery::Setting.find_or_set(:bitly_login,
+            'xxxxxxxxxxbitly_loginxxxxxxxx')
+        Refinery::Setting.find_or_set(:bitly_api_key,
+              'xxxxxxxxxxbitly_api_keyxxxxxxxx')  
         Refinery::Setting.find_or_set(:twitter_message,
           '{title}: {stub}. {url}')
       end
