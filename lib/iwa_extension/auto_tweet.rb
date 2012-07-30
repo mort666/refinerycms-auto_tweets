@@ -13,7 +13,7 @@ module IwaExtension
         config.oauth_token_secret = Refinery::Setting.get(:twitter_oauth_token_secret)
       end
       message = Refinery::Setting.get(:twitter_message)
-      message = message.gsub('{title}', title).gsub('{stub}', truncate(strip_tags(teaser), :length => 130-title.length, :seperator => "...")).gsub('{url}', ::IwaExtension::Bitly.shorten(url))
+      message = message.gsub('{title}', title).gsub('{stub}', truncate(self.strip_tags(teaser), :length => 130-title.length, :seperator => "...")).gsub('{url}', ::IwaExtension::Bitly.shorten(url))
       ::Twitter.update(message)
     end
   end
