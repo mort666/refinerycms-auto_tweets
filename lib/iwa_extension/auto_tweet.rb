@@ -11,7 +11,7 @@ module IwaExtension
         config.oauth_token_secret = Refinery::Setting.get(:twitter_oauth_token_secret)
       end
       message = Refinery::Setting.get(:twitter_message)
-      message = message.gsub('{title}', title).gsub('{url}', ::Bitly.shorten(url))
+      message = message.gsub('{title}', title).gsub('{url}', ::IwaExtension::Bitly.shorten(url))
       ::Twitter.update(message)
     end
   end
