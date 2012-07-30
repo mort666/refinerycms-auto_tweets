@@ -5,7 +5,7 @@ module IwaExtension
   module Tweeter
     include ActionView::Helpers::TextHelper
     
-    def self.post_tweet_message(title, url)
+    def self.post_tweet_message(title, teaser, url)
       ::Twitter.configure do |config|
         config.consumer_key = Refinery::Setting.get(:twitter_consumer_key)
         config.consumer_secret = Refinery::Setting.get(:twitter_consumer_secret)
@@ -13,7 +13,7 @@ module IwaExtension
         config.oauth_token_secret = Refinery::Setting.get(:twitter_oauth_token_secret)
       end
       message = Refinery::Setting.get(:twitter_message)
-      message = message.gsub('{title}', title).gsub('{stub}', truncate(strip_tags(custom_teaser), :length => 130-title.length, :seperator => "...")).gsub('{url}', ::IwaExtension::Bitly.shorten(url))
+      message = message.gsub('{title}', title).gsub('{stub}', truncate(strip_tags(teaser), :length => 130-title.length, :seperator => "...")).gsub('{url}', ::IwaExtension::Bitly.shorten(url))
       ::Twitter.update(message)
     end
   end
@@ -55,7 +55,7 @@ module IwaExtension
     def post_tweet!
       url = self.tweet_url
       begin
-        ::IwaExtension::Tweeter.post_tweet_message(title, url)
+        ::IwaExtension::Tweeter.post_tweet_message(title, custom_teaser, url)
         self.tweeted = true
         self.save
       rescue Exception => e 
