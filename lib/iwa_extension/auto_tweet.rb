@@ -20,8 +20,14 @@ module IwaExtension
       live? && post_tweet && !tweeted
     end
     
+    def tweet_url
+      engine = "Refinery::Core::Engine".constantize
+      engine.routes.default_url_options[:host] = Rails.application.routes.default_url_options[:host]
+      all_routes = engine.routes.url_helpers.blog_post_url(self)
+    end
+    
     def post_tweet!
-      url = self.refinery.blog_post_url(self)
+      url = self.tweet_url
       begin
         ::IwaExtension::Tweeter.post_tweet_message(title, url)
         self.tweeted = true
