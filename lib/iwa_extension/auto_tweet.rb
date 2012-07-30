@@ -15,8 +15,6 @@ module IwaExtension
       ::Twitter.update(message)
     end
   end
-  
-  require 'httparty'
 
   module Bitly
     include HTTParty

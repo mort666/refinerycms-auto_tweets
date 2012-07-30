@@ -10,5 +10,6 @@ Gem::Specification.new do |s|
   s.files             = Dir['lib/**/*', 'config/**/*', 'app/**/*']
 
   s.add_dependency    'refinerycms-blog', '>1.7.0'
+  s.add_dependency    'httparty'
   s.add_dependency    'twitter'
 end
