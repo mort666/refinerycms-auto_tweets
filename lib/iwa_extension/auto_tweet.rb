@@ -1,4 +1,5 @@
 require 'twitter'
+require 'httparty'
 
 module IwaExtension
   module Tweeter
@@ -10,8 +11,33 @@ module IwaExtension
         config.oauth_token_secret = Refinery::Setting.get(:twitter_oauth_token_secret)
       end
       message = Refinery::Setting.get(:twitter_message)
-      message = message.gsub('{title}', title).gsub('{url}', url)
+      message = message.gsub('{title}', title).gsub('{url}', ::Bitly.shorten(url))
       ::Twitter.update(message)
+    end
+  end
+  
+  require 'httparty'
+
+  module Bitly
+    include HTTParty
+    base_uri 'api.bit.ly'
+    format :json
+
+    # Usage: Bitly.shorten("http://example.com")
+    def self.shorten(url)
+      response = get('/v3/shorten', :query => required_params.merge(:longUrl => url ))
+      response['data']["url"]
+    end
+
+    # Usage: Bitly.stats("http://bit.ly/18LNRV")  
+    def self.clicks(url)
+      response = get('/v3/clicks', :query => required_params.merge(:shortUrl => url))
+      response['data']['clicks'][0]['user_clicks']
+    end
+
+    # your bit.ly api key can be found at http://bit.ly/a/your_api_key
+    def self.required_params
+      {:version => "2.0.1", :login => "o_2348nmppbm", :apiKey => 'R_acc53a3aabe1a1b0de5f34e22566a308'}
     end
   end
 
