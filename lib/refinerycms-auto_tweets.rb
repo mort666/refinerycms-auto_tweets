@@ -25,7 +25,7 @@ module Refinery
         Refinery::Setting.find_or_set(:twitter_consumer_secret,
           'xxxxxxxxxxtwitter_consumer_secretxxxxxxxx')
         Refinery::Setting.find_or_set(:twitter_message,
-          'A new blog post "{title}" is published. Read more at {url}.')
+          '{title}: {stub}. {url}')
       end
 
       require 'iwa_extension/auto_tweet'
