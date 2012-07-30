@@ -56,7 +56,7 @@ module IwaExtension
         ::IwaExtension::Tweeter.post_tweet_message(title, url)
         self.tweeted = true
         self.save
-      rescue e
+      rescue Exception => e 
         puts e.message  
         puts e.backtrace.inspect
       end
