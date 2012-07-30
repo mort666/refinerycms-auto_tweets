@@ -21,7 +21,7 @@ module IwaExtension
     end
     
     def post_tweet!
-      url = Rails.application.routes.url_helpers.refinery.blog_post_url(self)
+      url = refinery.blog_post_url(self)
       begin
         ::IwaExtension::Tweeter.post_tweet_message(title, url)
         self.tweeted = true

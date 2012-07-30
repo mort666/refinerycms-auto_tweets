@@ -31,6 +31,7 @@ module Refinery
       require 'iwa_extension/auto_tweet'
       config.to_prepare do
         Refinery::Blog::Post.class_eval do
+          include Rails.application.routes.url_helpers
           include ::IwaExtension::AutoTweet
         end
       end
